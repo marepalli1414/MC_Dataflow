@@ -1,0 +1,1286 @@
+{
+  "100": {
+    "action": "augment",
+    "parameters": {
+      "left": "Digest_EntitlementTransactions",
+      "left_key": [
+        "sfbase__EntitlementSchedule__c"
+      ],
+      "relationship": "Schedule",
+      "right": "Digest_EntitlementSchedule",
+      "right_key": [
+        "Id"
+      ],
+      "right_select": [
+        "EstimatedOverageDate__c",
+        "Intermediate_Usage__c",
+        "IsDeleted",
+        "IsLocked",
+        "Name",
+        "RecommendedRemainingQuantity__c",
+        "RecommendedUpsellQuantity__c",
+        "RecordTypeId",
+        "Remaining_Balance__c",
+        "sfbase__Allowance__c",
+        "AverageDailyUsage__c",
+        "sfbase__Entitlement__c",
+        "sfbase__SitesStatus__c",
+        "sfbase__UsageBalance__c",
+        "Usage__c",
+        "SystemModstamp"
+      ]
+    }
+  },
+  "101": {
+    "action": "augment",
+    "parameters": {
+      "left": "100",
+      "left_key": [
+        "Schedule.sfbase__Entitlement__c"
+      ],
+      "relationship": "Schedule.Entitlement",
+      "right": "Digest_Entitlement",
+      "right_key": [
+        "Id"
+      ],
+      "right_select": [
+        "IsDeleted",
+        "Name",
+        "IsLocked",
+        "RecordTypeId",
+        "sfbase__Account__c",
+        "sfbase__Contract__c",
+        "sfbase__EntitlementEdition__c",
+        "sfbase__EntitlementName__c",
+        "sfbase__EntitlementDefinition__c",
+        "sfbase__OverageMonthsAllowed__c",
+        "sfbase__MaxThreshold__c",
+        "sfbase__SitesStatus__c"
+      ]
+    }
+  },
+  "102": {
+    "action": "augment",
+    "parameters": {
+      "left": "101",
+      "left_key": [
+        "Schedule.Entitlement.RecordTypeId"
+      ],
+      "relationship": "Schedule.Entitlement.RecordTypeId",
+      "right": "Digest_RecordType",
+      "right_key": [
+        "Id"
+      ],
+      "right_select": [
+        "Name",
+        "SobjectType",
+        "DeveloperName"
+      ]
+    }
+  },
+  "103": {
+    "action": "augment",
+    "parameters": {
+      "left": "102",
+      "left_key": [
+        "Schedule.Entitlement.sfbase__Account__c"
+      ],
+      "relationship": "Schedule.Entitlement.Account",
+      "right": "Digest_Account2",
+      "right_key": [
+        "Id"
+      ],
+      "right_select": [
+        "Name",
+        "Type",
+        "Industry",
+        "Combo_Sector__c",
+        "Segment__c",
+        "SFDC_Sector__c",
+        "Sub_Sector__c",
+        "MC_ET_Services_AOV__c",
+        "Account_Classification__c",
+        "Cloud_Customer__c",
+        "Marketing_Cloud_AOV_Band__c",
+        "MC_AOV__c",
+        "ET_Marketing_Cloud_AOV__c",
+        "Region__c",
+        "Subregion__c",
+        "BillingCountry",
+        "Market_Segment__c",
+        "MC_Social_AOV_Band",
+        "MC_EMW_AOV_Band",
+        "MC_Services_AOV_Band"
+      ]
+    }
+  },
+  "104": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "Id"
+      ],
+      "left": "103",
+      "left_key": [
+        "UsageTypeComponent__c"
+      ],
+      "right_select": [
+        "Name",
+        "SystemModstamp",
+        "UsageType__c"
+      ],
+      "right": "Digest_UsageTypeComponent",
+      "relationship": "Component"
+    }
+  },
+  "105": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "Id"
+      ],
+      "left": "104",
+      "left_key": [
+        "Component.UsageType__c"
+      ],
+      "right_select": [
+        "ExternalName__c",
+        "Name",
+        "SystemModstamp"
+      ],
+      "right": "Digest_UsageType",
+      "relationship": "Component.Type"
+    }
+  },
+  "106": {
+    "action": "augment",
+    "parameters": {
+      "left": "105",
+      "left_key": [
+        "Component.Name"
+      ],
+      "right_select": [
+        "Realated_DB__c"
+      ],
+      "right": "Edgemart_ComponentLookup",
+      "right_key": [
+        "Name"
+      ],
+      "relationship": "Component.Lookup"
+    }
+  },
+  "107": {
+    "action": "filter",
+    "parameters": {
+      "filter": "Schedule.Entitlement.RecordTypeId:EQ:01230000001lsUFAAY",
+      "source": "106"
+    }
+  },
+  "201": {
+    "action": "augment",
+    "parameters": {
+      "left": "Edgemart_DailyActivity",
+      "left_key": [
+        "EnterpriseID"
+      ],
+      "right": "Digest_Tenant2",
+      "right_key": [
+        "ExternalId"
+      ],
+      "right_select": [
+        "Id",
+        "Name",
+        "CloudServiceProviderId",
+        "SystemModstamp",
+        "ServiceProviderKey",
+        "HasEntitlements",
+        "sfbase__AccountId__c",
+        "AccountId",
+        "AccountIdKey"
+      ],
+      "relationship": "Tenant"
+    }
+  },
+  "202": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "Id"
+      ],
+      "left": "201",
+      "left_key": [
+        "Tenant.AccountIdKey"
+      ],
+      "right_select": [
+        "Name",
+        "Type",
+        "Industry",
+        "Combo_Sector__c",
+        "Segment__c",
+        "SFDC_Sector__c",
+        "Sub_Sector__c",
+        "MC_ET_Services_AOV__c",
+        "Account_Classification__c",
+        "Cloud_Customer__c",
+        "Marketing_Cloud_AOV_Band__c",
+        "MC_AOV__c",
+        "ET_Marketing_Cloud_AOV__c",
+        "Region__c",
+        "Subregion__c",
+        "BillingCountry",
+        "Market_Segment__c",
+        "MC_Social_AOV_Band",
+        "MC_EMW_AOV_Band",
+        "MC_Services_AOV_Band"
+      ],
+      "right": "Digest_Account2",
+      "relationship": "Account"
+    }
+  },
+  "301": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "ExternalId"
+      ],
+      "left": "Edgemart_ActiveAudience",
+      "left_key": [
+        "EnterpriseID"
+      ],
+      "right_select": [
+        "CloudServiceProviderId",
+        "sfbase__AccountId__c",
+        "AccountId",
+        "AccountIdKey",
+        "Account.Name",
+        "Account.Type",
+        "Account.Industry",
+        "Account.Combo_Sector__c",
+        "Account.Segment__c",
+        "Account.SFDC_Sector__c",
+        "Account.Sub_Sector__c",
+        "Account.MC_ET_Services_AOV__c",
+        "Account.Account_Classification__c",
+        "Account.Cloud_Customer__c",
+        "Account.Marketing_Cloud_AOV_Band__c",
+        "Account.MC_AOV__c",
+        "Account.ET_Marketing_Cloud_AOV__c",
+        "Account.Region__c",
+        "Account.Subregion__c",
+        "Account.BillingCountry",
+        "Account.Market_Segment__c",
+        "Account.MC_Social_AOV_Band",
+        "Account.MC_EMW_AOV_Band",
+        "Account.MC_Services_AOV_Band"
+      ],
+      "right": "Join_Tenant_Account",
+      "relationship": "Audience"
+    }
+  },
+  "401": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "ExternalId"
+      ],
+      "left": "Edgemart_JBActivity",
+      "left_key": [
+        "EnterpriseID"
+      ],
+      "right_select": [
+        "CloudServiceProviderId",
+        "sfbase__AccountId__c",
+        "AccountId",
+        "AccountIdKey",
+        "Account.Name",
+        "Account.Type",
+        "Account.Industry",
+        "Account.Combo_Sector__c",
+        "Account.Segment__c",
+        "Account.SFDC_Sector__c",
+        "Account.Sub_Sector__c",
+        "Account.MC_ET_Services_AOV__c",
+        "Account.Account_Classification__c",
+        "Account.Cloud_Customer__c",
+        "Account.Marketing_Cloud_AOV_Band__c",
+        "Account.MC_AOV__c",
+        "Account.ET_Marketing_Cloud_AOV__c",
+        "Account.Region__c",
+        "Account.Subregion__c",
+        "Account.BillingCountry",
+        "Account.Market_Segment__c",
+        "Account.MC_Social_AOV_Band",
+        "Account.MC_EMW_AOV_Band",
+        "Account.MC_Services_AOV_Band"
+      ],
+      "right": "Join_Tenant_Account",
+      "relationship": "Ten"
+    }
+  },
+  "501": {
+    "action": "augment",
+    "parameters": {
+      "left": "Digest_RedAccounts",
+      "left_key": [
+        "RecordTypeId"
+      ],
+      "relationship": "RecordType",
+      "right": "Digest_RecordType",
+      "right_key": [
+        "Id"
+      ],
+      "right_select": [
+        "Name",
+        "SobjectType",
+        "DeveloperName"
+      ]
+    }
+  },
+  "502": {
+    "action": "augment",
+    "parameters": {
+      "left": "501",
+      "left_key": [
+        "At_Level_3_escalated_to__c"
+      ],
+      "relationship": "At_Level_3_escalated_to__c",
+      "right": "Digest_User",
+      "right_key": [
+        "Id"
+      ],
+      "right_select": [
+        "Name"
+      ]
+    }
+  },
+  "503": {
+    "action": "augment",
+    "parameters": {
+      "left": "502",
+      "left_key": [
+        "Executive_Sponsor_2__c"
+      ],
+      "relationship": "Executive_Sponsor_2__c",
+      "right": "Digest_User",
+      "right_key": [
+        "Id"
+      ],
+      "right_select": [
+        "Name"
+      ]
+    }
+  },
+  "504": {
+    "action": "augment",
+    "parameters": {
+      "left": "503",
+      "left_key": [
+        "Issue_Owner__c"
+      ],
+      "relationship": "Issue_Owner__c",
+      "right": "Digest_User",
+      "right_key": [
+        "Id"
+      ],
+      "right_select": [
+        "Name"
+      ]
+    }
+  },
+  "505": {
+    "action": "augment",
+    "parameters": {
+      "left": "504",
+      "left_key": [
+        "EPM_Owner__c"
+      ],
+      "relationship": "EPM_Owner__c",
+      "right": "Digest_User",
+      "right_key": [
+        "Id"
+      ],
+      "right_select": [
+        "Name"
+      ]
+    }
+  },
+  "506": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "Id"
+      ],
+      "left": "505",
+      "left_key": [
+        "Red_Account__c"
+      ],
+      "right_select": [
+        "Name",
+        "Type",
+        "Industry",
+        "Combo_Sector__c",
+        "Segment__c",
+        "SFDC_Sector__c",
+        "Sub_Sector__c",
+        "MC_ET_Services_AOV__c",
+        "Account_Classification__c",
+        "Cloud_Customer__c",
+        "Marketing_Cloud_AOV_Band__c",
+        "MC_AOV__c",
+        "ET_Marketing_Cloud_AOV__c",
+        "Region__c",
+        "Subregion__c",
+        "BillingCountry",
+        "Market_Segment__c",
+        "MC_Social_AOV_Band",
+        "MC_EMW_AOV_Band",
+        "MC_Services_AOV_Band"
+      ],
+      "right": "Digest_Account2",
+      "relationship": "Account"
+    }
+  },
+  "601": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "ExternalId"
+      ],
+      "left": "Edgemart_MonthlyActiveUsers",
+      "left_key": [
+        "EnterpriseID"
+      ],
+      "right_select": [
+        "CloudServiceProviderId",
+        "sfbase__AccountId__c",
+        "Id",
+        "Name",
+        "SystemModstamp",
+        "ServiceProviderKey",
+        "HasEntitlements",
+        "AccountId",
+        "AccountIdKey",
+        "Account.Name",
+        "Account.Type",
+        "Account.Industry",
+        "Account.Combo_Sector__c",
+        "Account.Segment__c",
+        "Account.SFDC_Sector__c",
+        "Account.Sub_Sector__c",
+        "Account.MC_ET_Services_AOV__c",
+        "Account.Account_Classification__c",
+        "Account.Cloud_Customer__c",
+        "Account.Marketing_Cloud_AOV_Band__c",
+        "Account.MC_AOV__c",
+        "Account.ET_Marketing_Cloud_AOV__c",
+        "Account.Region__c",
+        "Account.Subregion__c",
+        "Account.BillingCountry",
+        "Account.Market_Segment__c",
+        "Account.MC_Social_AOV_Band",
+        "Account.MC_EMW_AOV_Band",
+        "Account.MC_Services_AOV_Band"
+      ],
+      "right": "Join_Tenant_Account",
+      "relationship": "Ten"
+    }
+  },
+  "701": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "ExternalId"
+      ],
+      "left": "Edgemart_SocialStudio",
+      "left_key": [
+        "client_id"
+      ],
+      "right_select": [
+        "CloudServiceProviderId",
+        "sfbase__AccountId__c",
+        "Id",
+        "Name",
+        "SystemModstamp",
+        "ServiceProviderKey",
+        "HasEntitlements",
+        "AccountId",
+        "AccountIdKey",
+        "Account.Name",
+        "Account.Type",
+        "Account.Industry",
+        "Account.Combo_Sector__c",
+        "Account.Segment__c",
+        "Account.SFDC_Sector__c",
+        "Account.Sub_Sector__c",
+        "Account.MC_ET_Services_AOV__c",
+        "Account.Account_Classification__c",
+        "Account.Cloud_Customer__c",
+        "Account.Marketing_Cloud_AOV_Band__c",
+        "Account.MC_AOV__c",
+        "Account.ET_Marketing_Cloud_AOV__c",
+        "Account.Region__c",
+        "Account.Subregion__c",
+        "Account.BillingCountry",
+        "Account.Market_Segment__c",
+        "Account.MC_Social_AOV_Band",
+        "Account.MC_EMW_AOV_Band",
+        "Account.MC_Services_AOV_Band"
+      ],
+      "right": "Join_Tenant_Account",
+      "relationship": "Ten"
+    }
+  },
+  "801": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "ExternalId"
+      ],
+      "left": "Edgemart_Automation",
+      "left_key": [
+        "EnterpriseID"
+      ],
+      "right_select": [
+        "CloudServiceProviderId",
+        "sfbase__AccountId__c",
+        "Id",
+        "Name",
+        "SystemModstamp",
+        "ServiceProviderKey",
+        "HasEntitlements",
+        "AccountId",
+        "AccountIdKey",
+        "Account.Name",
+        "Account.Type",
+        "Account.Industry",
+        "Account.Combo_Sector__c",
+        "Account.Segment__c",
+        "Account.SFDC_Sector__c",
+        "Account.Sub_Sector__c",
+        "Account.MC_ET_Services_AOV__c",
+        "Account.Account_Classification__c",
+        "Account.Cloud_Customer__c",
+        "Account.Marketing_Cloud_AOV_Band__c",
+        "Account.MC_AOV__c",
+        "Account.ET_Marketing_Cloud_AOV__c",
+        "Account.Region__c",
+        "Account.Subregion__c",
+        "Account.BillingCountry",
+        "Account.Market_Segment__c",
+        "Account.MC_Social_AOV_Band",
+        "Account.MC_EMW_AOV_Band",
+        "Account.MC_Services_AOV_Band"
+      ],
+      "right": "Join_Tenant_Account",
+      "relationship": "Ten"
+    }
+  },
+  "Digest_EntitlementTransactions": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "object": "sfbase__EntitlementTransaction__c",
+      "fields": [
+        {
+          "name": "ChildExternalProvisionId__c"
+        },
+        {
+          "name": "CurrencyIsoCode"
+        },
+        {
+          "name": "Id"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "QuantityFactor__c"
+        },
+        {
+          "name": "RawQuantity__c"
+        },
+        {
+          "name": "sfbase__EntitlementSchedule__c"
+        },
+        {
+          "name": "sfbase__ExternalSystemId__c"
+        },
+        {
+          "name": "sfbase__OrderItemId__c"
+        },
+        {
+          "name": "sfbase__OrganizationId__c"
+        },
+        {
+          "name": "sfbase__OrganizationInstanceId__c"
+        },
+        {
+          "name": "sfbase__Quantity__c"
+        },
+        {
+          "name": "sfbase__TransactionDate__c"
+        },
+        {
+          "name": "sfbase__TransactionSubType__c"
+        },
+        {
+          "name": "sfbase__TransactionType__c"
+        },
+        {
+          "name": "UniqueReferenceKey__c"
+        },
+        {
+          "name": "UsageTypeComponent__c"
+        }
+      ]
+    }
+  },
+  "Digest_EntitlementSchedule": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "object": "sfbase__EntitlementSchedule__c",
+      "fields": [
+        {
+          "name": "EstimatedOverageDate__c"
+        },
+        {
+          "name": "Intermediate_Usage__c"
+        },
+        {
+          "name": "IsDeleted"
+        },
+        {
+          "name": "IsLocked"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "RecommendedRemainingQuantity__c"
+        },
+        {
+          "name": "RecommendedUpsellQuantity__c"
+        },
+        {
+          "name": "RecordTypeId"
+        },
+        {
+          "name": "Remaining_Balance__c"
+        },
+        {
+          "name": "sfbase__Allowance__c"
+        },
+        {
+          "name": "AverageDailyUsage__c"
+        },
+        {
+          "name": "sfbase__Entitlement__c"
+        },
+        {
+          "name": "sfbase__SitesStatus__c"
+        },
+        {
+          "name": "sfbase__UsageBalance__c"
+        },
+        {
+          "name": "Usage__c"
+        },
+        {
+          "name": "SystemModstamp"
+        },
+        {
+          "name": "Id"
+        }
+      ]
+    }
+  },
+  "Digest_RecordType": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "object": "RecordType",
+      "fields": [
+        {
+          "name": "Name"
+        },
+        {
+          "name": "SobjectType"
+        },
+        {
+          "name": "DeveloperName"
+        },
+        {
+          "name": "Id"
+        }
+      ]
+    }
+  },
+  "Digest_Entitlement": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "object": "sfbase__Entitlement__c",
+      "fields": [
+        {
+          "name": "IsDeleted"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "IsLocked"
+        },
+        {
+          "name": "RecordTypeId"
+        },
+        {
+          "name": "sfbase__Account__c"
+        },
+        {
+          "name": "sfbase__Contract__c"
+        },
+        {
+          "name": "sfbase__EntitlementEdition__c"
+        },
+        {
+          "name": "sfbase__EntitlementName__c"
+        },
+        {
+          "name": "sfbase__EntitlementDefinition__c"
+        },
+        {
+          "name": "sfbase__OverageMonthsAllowed__c"
+        },
+        {
+          "name": "sfbase__MaxThreshold__c"
+        },
+        {
+          "name": "sfbase__SitesStatus__c"
+        },
+        {
+          "name": "Id"
+        }
+      ]
+    }
+  },
+  "Digest_Account": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "object": "Account",
+      "fields": [
+        {
+          "name": "Name"
+        },
+        {
+          "name": "Type"
+        },
+        {
+          "name": "Industry"
+        },
+        {
+          "name": "Combo_Sector__c"
+        },
+        {
+          "name": "Segment__c"
+        },
+        {
+          "name": "SFDC_Sector__c"
+        },
+        {
+          "name": "Sub_Sector__c"
+        },
+        {
+          "name": "MC_ET_Services_AOV__c"
+        },
+        {
+          "name": "Id"
+        },
+        {
+          "name": "Account_Classification__c"
+        },
+        {
+          "name": "Cloud_Customer__c"
+        },
+        {
+          "name": "Marketing_Cloud_AOV_Band__c"
+        },
+        {
+          "name": "MC_AOV__c"
+        },
+        {
+          "name": "ET_Marketing_Cloud_AOV__c"
+        },
+        {
+          "name": "Region__c"
+        },
+        {
+          "name": "Subregion__c"
+        },
+        {
+          "name": "BillingCountry"
+        },
+        {
+          "name": "Market_Segment__c"
+        }
+      ]
+    }
+  },
+  "Digest_Account2": {
+    "action": "computeExpression",
+    "parameters": {
+      "source": "Digest_Account",
+      "mergeWithSource": true,
+      "computedFields": [
+        {
+          "name": "MC_Social_AOV_Band",
+          "type": "Text",
+          "saqlExpression": "case when MC_AOV__c is null then null when MC_AOV__c == 0 then \"$0\" when MC_AOV__c > 0 and MC_AOV__c <= 10000 then \"$1-10k\" when MC_AOV__c > 10000 and MC_AOV__c <= 50000 then \"$10-50k\" when MC_AOV__c > 50000 and MC_AOV__c <= 100000 then \"$50-100k\" when MC_AOV__c > 100000 and MC_AOV__c <= 200000 then \"$100k-200k\" when MC_AOV__c > 200000 and MC_AOV__c <= 600000 then \"$200k-600k\" when MC_AOV__c > 600000 and MC_AOV__c <= 1000000 then \"$600k-1M\" when MC_AOV__c > 1000000 and MC_AOV__c <= 5000000 then \"$1M-5M\" when MC_AOV__c > 5000000 and MC_AOV__c <= 10000000 then \"$5M-10M\" when MC_AOV__c > 10000000 and MC_AOV__c <= 25000000 then \"$10M-25M\" else \"Other\" end"
+        },
+        {
+          "name": "MC_EMW_AOV_Band",
+          "type": "Text",
+          "saqlExpression": "case when ET_Marketing_Cloud_AOV__c is null then null when ET_Marketing_Cloud_AOV__c == 0 then \"$0\" when ET_Marketing_Cloud_AOV__c > 0 and ET_Marketing_Cloud_AOV__c <= 10000 then \"$1-10k\" when ET_Marketing_Cloud_AOV__c > 10000 and ET_Marketing_Cloud_AOV__c <= 50000 then \"$10-50k\" when ET_Marketing_Cloud_AOV__c > 50000 and ET_Marketing_Cloud_AOV__c <= 100000 then \"$50-100k\" when ET_Marketing_Cloud_AOV__c > 100000 and ET_Marketing_Cloud_AOV__c <= 200000 then \"$100k-200k\" when ET_Marketing_Cloud_AOV__c > 200000 and ET_Marketing_Cloud_AOV__c <= 600000 then \"$200k-600k\" when ET_Marketing_Cloud_AOV__c > 600000 and ET_Marketing_Cloud_AOV__c <= 1000000 then \"$600k-1M\" when ET_Marketing_Cloud_AOV__c > 1000000 and ET_Marketing_Cloud_AOV__c <= 5000000 then \"$1M-5M\" when ET_Marketing_Cloud_AOV__c > 5000000 and ET_Marketing_Cloud_AOV__c <= 10000000 then \"$5M-10M\" when ET_Marketing_Cloud_AOV__c > 10000000 and ET_Marketing_Cloud_AOV__c <= 25000000 then \"$10M-25M\" else \"Other\" end"
+        },
+        {
+          "name": "MC_Services_AOV_Band",
+          "type": "Text",
+          "saqlExpression": "case when MC_ET_Services_AOV__c is null then null when MC_ET_Services_AOV__c == 0 then \"$0\" when MC_ET_Services_AOV__c > 0 and MC_ET_Services_AOV__c <= 10000 then \"$1-10k\" when MC_ET_Services_AOV__c > 10000 and MC_ET_Services_AOV__c <= 50000 then \"$10-50k\" when MC_ET_Services_AOV__c > 50000 and MC_ET_Services_AOV__c <= 100000 then \"$50-100k\" when MC_ET_Services_AOV__c > 100000 and MC_ET_Services_AOV__c <= 200000 then \"$100k-200k\" when MC_ET_Services_AOV__c > 200000 and MC_ET_Services_AOV__c <= 600000 then \"$200k-600k\" when MC_ET_Services_AOV__c > 600000 and MC_ET_Services_AOV__c <= 1000000 then \"$600k-1M\" when MC_ET_Services_AOV__c > 1000000 and MC_ET_Services_AOV__c <= 5000000 then \"$1M-5M\" when MC_ET_Services_AOV__c > 5000000 and MC_ET_Services_AOV__c <= 10000000 then \"$5M-10M\" when MC_ET_Services_AOV__c > 10000000 and MC_ET_Services_AOV__c <= 25000000 then \"$10M-25M\" else \"Other\" end"
+        }
+      ]
+    }
+  },
+  "Digest_Tenant": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "object": "Tenant",
+      "fields": [
+        {
+          "name": "Id"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "CloudServiceProviderId"
+        },
+        {
+          "name": "SystemModstamp"
+        },
+        {
+          "name": "ExternalId"
+        },
+        {
+          "name": "ServiceProviderKey"
+        },
+        {
+          "name": "HasEntitlements"
+        },
+        {
+          "name": "sfbase__AccountId__c"
+        },
+        {
+          "name": "AccountId"
+        }
+      ]
+    }
+  },
+  "Digest_Tenant2": {
+    "action": "computeExpression",
+    "parameters": {
+      "source": "Digest_Tenant",
+      "mergeWithSource": true,
+      "computedFields": [
+        {
+          "name": "AccountIdKey",
+          "type": "Text",
+          "saqlExpression": "case when sfbase__AccountId__c is not null then sfbase__AccountId__c else AccountId end"
+        }
+      ]
+    }
+  },
+  "Digest_UsageTypeComponent": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "object": "UsageTypeComponent__c",
+      "fields": [
+        {
+          "name": "Id"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "SystemModstamp"
+        },
+        {
+          "name": "UsageType__c"
+        }
+      ]
+    }
+  },
+  "Digest_UsageType": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "object": "UsageType__c",
+      "fields": [
+        {
+          "name": "Id"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "SystemModstamp"
+        },
+        {
+          "name": "ExternalName__c"
+        }
+      ]
+    }
+  },
+  "Edgemart_ComponentLookup": {
+    "action": "edgemart",
+    "parameters": {
+      "alias": "ComponentLookup"
+    }
+  },
+  "Register_Entitlements": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "source": "107",
+      "alias": "EntitlementTransactions",
+      "name": "EntitlementTransactions"
+    }
+  },
+  "Edgemart_DailyActivity": {
+    "action": "edgemart",
+    "parameters": {
+      "alias": "Daily_Activity"
+    }
+  },
+  "Register_DailyActivity_Tenants": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "DailyActivity_Tenants",
+      "alias": "DailyActivity_Tenants",
+      "source": "202"
+    }
+  },
+  "Join_Tenant_Account": {
+    "action": "augment",
+    "parameters": {
+      "left": "Digest_Tenant2",
+      "left_key": [
+        "AccountIdKey"
+      ],
+      "right": "Digest_Account2",
+      "right_key": [
+        "Id"
+      ],
+      "right_select": [
+        "Name",
+        "Type",
+        "Industry",
+        "Combo_Sector__c",
+        "Segment__c",
+        "SFDC_Sector__c",
+        "Sub_Sector__c",
+        "MC_ET_Services_AOV__c",
+        "Account_Classification__c",
+        "Cloud_Customer__c",
+        "Marketing_Cloud_AOV_Band__c",
+        "MC_AOV__c",
+        "ET_Marketing_Cloud_AOV__c",
+        "Region__c",
+        "Subregion__c",
+        "BillingCountry",
+        "Market_Segment__c",
+        "MC_Social_AOV_Band",
+        "MC_EMW_AOV_Band",
+        "MC_Services_AOV_Band"
+      ],
+      "relationship": "Account"
+    }
+  },
+  "Edgemart_ActiveAudience": {
+    "action": "edgemart",
+    "parameters": {
+      "alias": "Active_Audience"
+    }
+  },
+  "Register_ActiveAudience_Tenants": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "ActiveAudience_Tenants",
+      "alias": "ActiveAudience_Tenants",
+      "source": "301"
+    }
+  },
+  "Edgemart_JBActivity": {
+    "action": "edgemart",
+    "parameters": {
+      "alias": "JBActivity"
+    }
+  },
+  "Register_JBActivity_Accounts": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "JBActivity_Account",
+      "alias": "JBActivity_Account",
+      "source": "401"
+    }
+  },
+  "Digest_RedAccounts": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "object": "Red_Account__c",
+      "fields": [
+        {
+          "name": "Days_to_Renewal_at_Red_Start_Date__c"
+        },
+        {
+          "name": "Key_Risk_Category__c"
+        },
+        {
+          "name": "Issue_Product__c"
+        },
+        {
+          "name": "ACV_at_Risk__c"
+        },
+        {
+          "name": "At_Level_3_escalated_to__c"
+        },
+        {
+          "name": "EOP_Sponsor__c"
+        },
+        {
+          "name": "EVP_Escalation__c"
+        },
+        {
+          "name": "Days_Red__c"
+        },
+        {
+          "name": "Id"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "Red_Account__c"
+        },
+        {
+          "name": "Salesforce_Cloud__c"
+        },
+        {
+          "name": "Executive_Action_Requested__c"
+        },
+        {
+          "name": "Executive_Sponsor_2__c"
+        },
+        {
+          "name": "Instance__c"
+        },
+        {
+          "name": "Issue_Owner__c"
+        },
+        {
+          "name": "Renewal_Date__c"
+        },
+        {
+          "name": "SystemModstamp"
+        },
+        {
+          "name": "Current_Red_Start_Date__c",
+          "fiscalMonthOffset": 1,
+          "isYearEndFiscalYear": false
+        },
+        {
+          "name": "Parent_Red_Account__c"
+        },
+        {
+          "name": "Parent_Account__c"
+        },
+        {
+          "name": "Red_Account_Status__c"
+        },
+        {
+          "name": "Stage__c"
+        },
+        {
+          "name": "EPM_Owner__c"
+        },
+        {
+          "name": "Risk_Detail__c"
+        },
+        {
+          "name": "RecordTypeId"
+        },
+        {
+          "name": "Product_RCA_Sub_category__c"
+        },
+        {
+          "name": "Executive_Outreach_2__c"
+        }
+      ]
+    }
+  },
+  "Digest_User": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "object": "User",
+      "fields": [
+        {
+          "name": "Id"
+        },
+        {
+          "name": "Name"
+        }
+      ]
+    }
+  },
+  "Digest_MC_Member": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "object": "MCMember__c",
+      "fields": [
+        {
+          "name": "Id"
+        },
+        {
+          "name": "Name"
+        },
+        {
+          "name": "SystemModstamp"
+        },
+        {
+          "name": "ParentID__c"
+        },
+        {
+          "name": "StackID__c"
+        },
+        {
+          "name": "DBID__c"
+        },
+        {
+          "name": "MemberName__c"
+        },
+        {
+          "name": "Account__c"
+        },
+        {
+          "name": "EnterpriseID__c"
+        }
+      ]
+    }
+  },
+  "Register_RedAccounts": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "Red_Accounts",
+      "alias": "Red_Accounts",
+      "source": "506"
+    }
+  },
+  "Calc_Fields_DailyActivity": {
+    "action": "computeExpression",
+    "parameters": {
+      "source": "202",
+      "mergeWithSource": true,
+      "computedFields": [
+        {
+          "defaultValue": "0",
+          "precision": 18,
+          "name": "daysOld",
+          "saqlExpression": "daysBetween(toDate(period,\"yyyy-MM-dd\"),now())",
+          "scale": 5,
+          "type": "Numeric"
+        },
+        {
+          "name": "myKey",
+          "saqlExpression": "EnterpriseID + \"_\" + StackID",
+          "type": "Text"
+        }
+      ]
+    }
+  },
+  "Filter_Activity": {
+    "action": "filter",
+    "parameters": {
+      "filter": "daysOld:R::90",
+      "source": "Calc_Fields_DailyActivity"
+    }
+  },
+  "Calc_Fields_Members": {
+    "action": "computeExpression",
+    "parameters": {
+      "source": "Digest_MC_Member",
+      "mergeWithSource": true,
+      "computedFields": [
+        {
+          "name": "myKey",
+          "saqlExpression": "EnterpriseID__c + \"_\" + StackID__c",
+          "type": "Text"
+        }
+      ]
+    }
+  },
+  "Augment_Member_Activity": {
+    "action": "augment",
+    "parameters": {
+      "right_key": [
+        "myKey"
+      ],
+      "left": "Calc_Fields_Members",
+      "left_key": [
+        "myKey"
+      ],
+      "right_select": [
+        "sam_weight"
+      ],
+      "right": "Filter_Activity",
+      "relationship": "Activity",
+      "operation": "LookupMultiValue"
+    }
+  },
+  "Register_Member_Activity": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "Members62_Activity",
+      "alias": "Members62_Activity",
+      "source": "Augment_Member_Activity"
+    }
+  },
+  "Edgemart_MonthlyActiveUsers": {
+    "action": "edgemart",
+    "parameters": {
+      "alias": "MonthlyActiveUsers"
+    }
+  },
+  "Register_MonthlyActiveUsers_Accounts": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "MonthlyActiveUsers_Accounts",
+      "alias": "MonthlyActiveUsers_Accounts",
+      "source": "601"
+    }
+  },
+  "Edgemart_SocialStudio": {
+    "action": "edgemart",
+    "parameters": {
+      "alias": "SocialStudio"
+    }
+  },
+  "Register_SocialStudio_Accounts": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "SocialStudio_Accounts",
+      "alias": "SocialStudio_Accounts",
+      "source": "701"
+    }
+  },
+  "Register_Automation_Accounts": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "Automation_Accounts",
+      "alias": "Automation_Accounts",
+      "source": "801"
+    }
+  }
+}

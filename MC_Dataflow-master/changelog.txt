@@ -1,0 +1,90 @@
+v5.0
+	Split Dataflow. Created MC_Org62_v5.0.json, MC_RedAccount_Dataflow_v1.2 and MC_Entitlements_Dataflow_v1.2
+	Removed nodes:
+		Digest_EntitlementTransactions
+		Digest_EntitlementSchedule
+		Digest_Entitlement
+		Digest_RecordType
+		Digest_UsageTypeComponent
+		Digest_UsageType
+		Edgemart_ComponentLookup
+		100
+		101
+		102
+		103
+		104
+		105
+		106
+		107
+		Register_Entitlements
+		Digest_User
+		Digest_RedAccounts
+		501
+		502
+		503
+		504
+		505
+		506
+		Register_RedAccounts
+		Digest_MC_Member
+		Calc_Fields_DailyActivity
+		Filter_Activity
+		Calc_Fields_Members
+		Augment_Member_Activity
+		Register_Member_Activity
+	
+v4.8
+	Added Edgemart_Automation
+	
+v4.7
+	Fiscal year offset corrected
+	Added BillingState field to account digest
+	Fixed fatal error: Filter_Activity node
+		Created computed field isOld.
+		Filtering based on that field
+	*Update* - Error found: Edgemart_Automation missing	
+
+v4.6
+	Added fiscal year offset for digested salesforce objects. 
+	*Update* - Error found: Fiscal offset is correctly set to 1, but isYearEndFiscalYear should be set to true
+	
+v4.5
+	New Dataset(s) Created:
+		Automation_Accounts
+	
+	-Join Automation with Tenants and Accounts
+	
+v4.4
+	Fixed potential error:
+		removed key in select for nodes 601 and 701 (“ExternalId”)
+
+v4.3
+	Fixed error:
+		duplicated row in nodes 601 and 701 ("CloudServiceProviderId”)
+
+v4.2
+	New Dataset(s) Created:
+		SocialStudio_Accounts
+	
+	-Join SocialStudio with Tenants and Accounts
+
+v4.1
+	Notes:
+		Edgemart_MonthlyActiveUsers incorrectly referenced JBActivity - this has been fixed
+
+v4.0
+	Notes:
+		Account AOV Banding calculations have been added. This can be used in a list filter on all relevant DBs
+
+	New Dataset(s) Created:
+		Red_Accounts
+		Members62_Activity
+		MonthlyActiveUsers_Accounts
+
+
+	-Additional Account fields digested: Region__c, Subregion__c, BillingCountry, Market_Segment__c
+	-Additional Tenant field digested: AccountID
+	-Calculated fields for Account created: MC_Social_AOV_Band, MC_EMW_AOV_Band, MC_Services_AOV_Band
+	-Merge Tenant account ID lookup fields: AccountIdKey
+	-Complete Red account overhaul, beginning on node 501.
+	-Join MonthlyActiveUsers with Tenants and Accounts
